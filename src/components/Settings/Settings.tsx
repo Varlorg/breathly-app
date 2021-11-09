@@ -37,6 +37,7 @@ export const Settings: FC<Props> = ({ visible, onHide, onBackButtonPress }) => {
   }[] = [
     { value: "disabled", label: "Disabled" },
     { value: "laura", label: "Laura's voice" },
+    { value: "juliane", label: "Juliane's voice" },
     { value: "paul", label: "Paul's voice" },
     { value: "bell", label: "Bell cue" },
   ];

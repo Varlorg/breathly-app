@@ -84,21 +84,25 @@ export const ExerciseCircle: FC<Props> = ({
     const step = activeSteps[stepIndex];
     if (step.id === "exhale") {
       if (guidedBreathingMode === "laura") playSound("lauraBreatheOut");
+      if (guidedBreathingMode === "juliane") playSound("julianeBreatheOut");
       if (guidedBreathingMode === "paul") playSound("paulBreatheOut");
       if (guidedBreathingMode === "bell") playSound("cueBell1");
       showCirlceMinAnimation.start();
     } else if (step.id === "inhale") {
       if (guidedBreathingMode === "laura") playSound("lauraBreatheIn");
+      if (guidedBreathingMode === "juliane") playSound("julianeBreatheIn");
       if (guidedBreathingMode === "paul") playSound("paulBreatheIn");
       if (guidedBreathingMode === "bell") playSound("cueBell1");
       hideCirlceMinAnimation.start();
     } else if (step.id === "afterExhale") {
       if (guidedBreathingMode === "laura") playSound("lauraHold");
+      if (guidedBreathingMode === "juliane") playSound("julianeHold");
       if (guidedBreathingMode === "paul") playSound("paulHold");
       if (guidedBreathingMode === "bell") playSound("cueBell2");
       hideCirlceMinAnimation.start();
     } else if (step.id === "afterInhale") {
       if (guidedBreathingMode === "laura") playSound("lauraHold");
+      if (guidedBreathingMode === "juliane") playSound("julianeHold");
       if (guidedBreathingMode === "paul") playSound("paulHold");
       if (guidedBreathingMode === "bell") playSound("cueBell2");
     }
