@@ -13,14 +13,7 @@ import { fontThin } from "../../config/fonts";
 import { playSound } from "../../services/sound";
 import ReactNativeHaptic from "react-native-haptic";
 import { GuidedBreathingMode } from "../../types/GuidedBreathingMode";
-
-interface Step {
-  id: string;
-  label: string;
-  duration: number;
-  showDots: boolean;
-  skipped: boolean;
-}
+import { Step } from "../../types/Step";
 
 type Props = {
   steps: Step[];
@@ -39,7 +32,7 @@ export const ExerciseCircle: FC<Props> = ({
   const [showUpAnimVal] = useState(new Animated.Value(0));
   const [scaleAnimVal] = useState(new Animated.Value(0));
   const [textAnimVal] = useState(new Animated.Value(1));
-  const [cirlceMinAnimVal] = useState(new Animated.Value(0));
+  const [circleMinAnimVal] = useState(new Animated.Value(0));
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const activeSteps = steps.filter((x) => !x.skipped);
   const currentStep = activeSteps[currentStepIndex];
@@ -64,12 +57,12 @@ export const ExerciseCircle: FC<Props> = ({
     ]);
   };
 
-  const showCirlceMinAnimation = animate(cirlceMinAnimVal, {
+  const showCircleMinAnimation = animate(circleMinAnimVal, {
     toValue: 1,
     duration: fadeInAnimDuration,
   });
 
-  const hideCirlceMinAnimation = animate(cirlceMinAnimVal, {
+  const hideCircleMinAnimation = animate(circleMinAnimVal, {
     toValue: 0,
     duration: fadeInAnimDuration,
   });
@@ -87,19 +80,19 @@ export const ExerciseCircle: FC<Props> = ({
       if (guidedBreathingMode === "juliane") playSound("julianeBreatheOut");
       if (guidedBreathingMode === "paul") playSound("paulBreatheOut");
       if (guidedBreathingMode === "bell") playSound("cueBell1");
-      showCirlceMinAnimation.start();
+      showCircleMinAnimation.start();
     } else if (step.id === "inhale") {
       if (guidedBreathingMode === "laura") playSound("lauraBreatheIn");
       if (guidedBreathingMode === "juliane") playSound("julianeBreatheIn");
       if (guidedBreathingMode === "paul") playSound("paulBreatheIn");
       if (guidedBreathingMode === "bell") playSound("cueBell1");
-      hideCirlceMinAnimation.start();
+      hideCircleMinAnimation.start();
     } else if (step.id === "afterExhale") {
       if (guidedBreathingMode === "laura") playSound("lauraHold");
       if (guidedBreathingMode === "juliane") playSound("julianeHold");
       if (guidedBreathingMode === "paul") playSound("paulHold");
       if (guidedBreathingMode === "bell") playSound("cueBell2");
-      hideCirlceMinAnimation.start();
+      hideCircleMinAnimation.start();
     } else if (step.id === "afterInhale") {
       if (guidedBreathingMode === "laura") playSound("lauraHold");
       if (guidedBreathingMode === "juliane") playSound("julianeHold");
@@ -138,8 +131,8 @@ export const ExerciseCircle: FC<Props> = ({
     return () => {
       cleanUpAnimationsSteps && cleanUpAnimationsSteps();
       showUpAnimation.stop();
-      showCirlceMinAnimation.stop();
-      hideCirlceMinAnimation.stop();
+      showCircleMinAnimation.stop();
+      hideCircleMinAnimation.stop();
     };
   });
 
@@ -177,7 +170,7 @@ export const ExerciseCircle: FC<Props> = ({
   };
 
   const circleMinAnimatedStyle = {
-    opacity: cirlceMinAnimVal.interpolate({
+    opacity: circleMinAnimVal.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 1],
     }),
